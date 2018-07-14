@@ -15,7 +15,7 @@ class Lasso:
         self.tmax = tmax
         if method == APG:
             self.prevW = self.w
-            self.t = 0
+            self.s = 0
             self.update = self.updateAPG
         else:
             self.update = self.updatePG
@@ -40,9 +40,10 @@ class Lasso:
         self.w = self.prox_eta(self.w - self.eta * self.__phiPrime(self.w))
 
     def updateAPG(self):
-        self.t += 1
         prevW = self.w
-        v = self.w + ((self.t - 1) / (self.t + 2)) * (self.w - self.prevW)
+        s = self.s
+        self.s = 0.5 * (1 + np.sqrt(1 + 4 * self.s ** 2))
+        v = self.w + (s - 1) * (self.w - self.prevW) / self.s
         self.w = self.prox_eta(v - self.eta * self.__phiPrime(v))
         self.prevW = prevW
 

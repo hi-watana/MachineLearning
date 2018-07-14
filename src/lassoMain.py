@@ -7,10 +7,12 @@ from Lasso import APG
 from Lasso import PG
 
 if __name__ == "__main__":
-    for lam, wAns in [(2, np.matrix([0.818, 1.091])), (4, np.matrix([0.636, 0.182])), (6, np.matrix([0.333, 0.]))]:
-        modelPG = Lasso(np.matrix([1, 2]), np.matrix([[3, 0.5], [0.5, 1]]), lam, method=PG, tmax=50)
+    tmax = 20
+    #for lam, wAns in [(2, np.matrix([0.8181818, 1.0909091])), (4, np.matrix([0.6363636, 0.1818182])), (6, np.matrix([0.3333333, 0.]))]:
+    for lam, wAns in [(2, np.matrix([0.81818, 1.09091])), (4, np.matrix([0.63636, 0.18182])), (6, np.matrix([0.33333, 0.]))]:
+        modelPG = Lasso(np.matrix([1, 2]), np.matrix([[3, 0.5], [0.5, 1]]), lam, method=PG, tmax=tmax)
         modelPG.solve()
-        modelAPG = Lasso(np.matrix([1, 2]), np.matrix([[3, 0.5], [0.5, 1]]), lam, method=APG, tmax=50)
+        modelAPG = Lasso(np.matrix([1, 2]), np.matrix([[3, 0.5], [0.5, 1]]), lam, method=APG, tmax=tmax)
         modelAPG.solve()
         yPG = [np.sqrt(dw * dw.T).tolist()[0][0] for dw in (w - wAns for w in modelPG.history)]
         yAPG = [np.sqrt(dw * dw.T).tolist()[0][0] for dw in (w - wAns for w in modelAPG.history)]
