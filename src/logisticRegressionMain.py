@@ -25,6 +25,7 @@ if __name__ == "__main__":
 
     models = [None] * 2
     methods = [GRAD, NEWTON]
+    methodNames = {GRAD: "steepest gradient method", NEWTON: "newton method"}
     for i, method in enumerate(methods):
         models[i] = LogisticRegression(y, X, method, tmax=10, lam=1)
         models[i].solve()
@@ -37,9 +38,9 @@ if __name__ == "__main__":
         wlist = model.w.tolist()[0]
         points_on_boundary = [(np.matrix([-wlist[1], wlist[0]]) * model.C * t + model.mu).tolist()[0] for t in np.arange(-4.0, 4.0, 0.1)]
         x_points, y_points = zip(*points_on_boundary)
-        plt.plot(x_points, y_points, label=method)
+        plt.plot(x_points, y_points, label=methodNames[method])
 
-    plt.legend(loc = "upper right")
+    plt.legend(loc = "upper left")
     plt.savefig("classification.pdf")
 
     plt.figure() # clear graph
@@ -49,7 +50,7 @@ if __name__ == "__main__":
         #w1_list = [w1 / w2 for (w1, w2) in model.history]
         t_list = list(range(len(model.history)))
         jw_list = [model.lossFunction(np.matrix(w)) for w in model.history]
-        plt.plot(t_list, jw_list, label=method)
+        plt.plot(t_list, jw_list, label=methodNames[method])
         #plt.plot(w1_list, jw_list, ".")
     plt.xlabel("t")
     plt.ylabel("J(w)")
