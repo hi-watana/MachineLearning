@@ -7,8 +7,7 @@ from Lasso import APG
 from Lasso import PG
 
 if __name__ == "__main__":
-    tmax = 20
-    #for lam, wAns in [(2, np.matrix([0.8181818, 1.0909091])), (4, np.matrix([0.6363636, 0.1818182])), (6, np.matrix([0.3333333, 0.]))]:
+    tmax = 80
     for lam, wAns in [(2, np.matrix([0.81818, 1.09091])), (4, np.matrix([0.63636, 0.18182])), (6, np.matrix([0.33333, 0.]))]:
         modelPG = Lasso(np.matrix([1, 2]), np.matrix([[3, 0.5], [0.5, 1]]), lam, method=PG, tmax=tmax)
         modelPG.solve()
