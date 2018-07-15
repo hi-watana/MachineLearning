@@ -1,4 +1,5 @@
 # MachineLearning
+This repository contains source codes for experimenting some method related to machine learning.
 
 <a name="dataset"></a>
 ## Dataset
