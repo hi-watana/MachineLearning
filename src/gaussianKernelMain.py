@@ -47,5 +47,5 @@ if __name__ == "__main__":
     plt.scatter(X[:, 0].A1, X[:, 1].A1, c=y.A1, cmap=plt.cm.Paired)
     plt.xlim(xx.min(), xx.max())
     plt.ylim(yy.min(), yy.max())
-    plt.savefig("%d-%f-%d.pdf" % (n, alpha, dim))
+    plt.savefig("%d-%d-%d.pdf" % (n, int(alpha), dim))
 
