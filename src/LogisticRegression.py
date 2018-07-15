@@ -70,7 +70,6 @@ class LogisticRegression:
                 break
             else:
                 self.d = d
-                print(d)
 
     def predict(self, X):
         return np.matrix([[1] if 1.0 / (1 + np.exp(- self.w * xi.T)) >= 0.5 else [-1] for xi in X])
